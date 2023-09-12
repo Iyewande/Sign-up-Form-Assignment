@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Signup and Login Utilizing Local Storage</title>
+  </head>
+  <body>
+    <h1>Signup</h1>
+    <form id="signupForm">
+      <input
+        type="text"
+        id="signupUsername"
+        placeholder="Username"
+        required
+      /><br />
+      <input
+        type="password"
+        id="signupPassword"
+        placeholder="Password"
+        required
+      /><br />
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <h1>Login</h1>
+    <form id="login-form">
+      <input
+        type="text"
+        id="loginUsername"
+        placeholder="Username"
+        required
+      /><br />
+      <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+        required
+      /><br />
+      <button type="submit">Login</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script>
+      // Signup Form
+      const signupForm = document.getElementById("signupForm");
+      const signupUsername = document.getElementById("signupUsername");
+      const signupPassword = document.getElementById("signupPassword");
+
+      signupForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const username = signupUsername.value;
+        const password = signupPassword.value;
+
+        if (localStorage.getItem(username)) {
+          alert("Error, Username already exists.");
+        } else {
+          localStorage.setItem(username, password);
+          alert("Success, Signup successful! You can now login.");
+          signupForm.reset();
+        }
+      });
+
+      // Login Form
+      const loginForm = document.getElementById("loginForm");
+      const loginUsername = document.getElementById("loginUsername");
+      const loginPassword = document.getElementById("loginPassword");
+
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const username = loginUsername.value;
+        const password = loginPassword.value;
+
+        if (localStorage.getItem(username) === password) {
+          alert("Success, Login successful!");
+          loginForm.reset();
+        } else {
+          alert("Error, Invalid username or password.");
+        }
+      });
+    </script>
+  </body>
+</html>
